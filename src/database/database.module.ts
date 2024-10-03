@@ -5,17 +5,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
     imports: [
         TypeOrmModule.forRootAsync({
-            useFactory: (ConfigService: ConfigService) => ({
-                type: 'postgres',
-                host: '172.18.0.2',
-                port: 5432,
-                database: 'test_db',
-                username: 'root',
-                password: 'root',
-                autoLoadEntities: true,
-                synchronize: true
-            }),
             inject: [ConfigService],
+            useFactory: (ConfigService: ConfigService) => {
+                return {
+                    type: 'postgres',
+                    host: 'localhost',
+                    port: 5432,
+                    database: 'test_db',
+                    username: 'root',
+                    password: 'root',
+                    autoLoadEntities: true,
+                    synchronize: true
+                }
+            }
         })
     ]
 })
