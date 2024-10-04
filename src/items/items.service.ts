@@ -33,7 +33,7 @@ export class ItemsService {
     await this.entityManager.save(item);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
+  async remove(id: number) {
+    return this.itemsRepository.delete(id);
   }
 }
