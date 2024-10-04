@@ -22,12 +22,15 @@ export class ItemsService {
     return this.itemsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  async findOne(id: number) {
+    return this.itemsRepository.findOneBy({ id });
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
+  async update(id: number, updateItemDto: UpdateItemDto) {
+    const item = await this.itemsRepository.findOneBy({ id });
+    item.public = updateItemDto.public;
+
+    await this.entityManager.save(item);
   }
 
   remove(id: number) {
