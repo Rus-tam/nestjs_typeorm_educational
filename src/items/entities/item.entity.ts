@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Listing } from "./listing";
+import { Listing } from "./listing.entity";
 
 @Entity()
 export class Item {
@@ -12,7 +12,7 @@ export class Item {
     @Column({ default: true })
     public: boolean;
 
-    @OneToOne(() => Listing)
+    @OneToOne(() => Listing, { cascade: true })
     @JoinColumn()
     listing: Listing;
 
