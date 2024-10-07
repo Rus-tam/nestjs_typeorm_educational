@@ -16,5 +16,5 @@ export class Item extends AbstractEntity<Item> {
     listing: Listing;
 
     @OneToMany(() => Comment, (comment) => comment.item, { cascade: true })
-    comment: Comment[];
+    comments: Comment[];
 }
