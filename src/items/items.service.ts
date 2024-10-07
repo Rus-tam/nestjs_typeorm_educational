@@ -32,7 +32,10 @@ export class ItemsService {
   }
 
   async findOne(id: number) {
-    return this.itemsRepository.findOneBy({ id });
+    return this.itemsRepository.findOne({
+      where: { id },
+      relations: { listing: true }
+    })
   }
 
   async update(id: number, updateItemDto: UpdateItemDto) {
