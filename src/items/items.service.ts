@@ -16,14 +16,17 @@ export class ItemsService {
   ) { }
 
   async create(createItemDto: CreateItemDto) {
+    const currentDate = new Date();
     const listing = new Listing({
       ...createItemDto.listing,
-      rating: 0
+      rating: 0,
+      date: currentDate
     })
     const item = new Item({
       ...createItemDto,
       comments: [],
-      listing
+      listing,
+      date: currentDate
     });
     await this.entityManager.save(item);
   }
